@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 40">
+  <defs>
+    <linearGradient id="bluerankGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00a8e8" />
+      <stop offset="100%" stop-color="#005b9f" />
+    </linearGradient>
+  </defs>
+  <text x="0" y="30" font-family="Arial, sans-serif" font-weight="bold" font-size="28" fill="url(#bluerankGrad)">Bluerank</text>
+</svg>
