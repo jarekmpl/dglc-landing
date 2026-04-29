@@ -1,6 +1,10 @@
 <?php
 
-$dbPath = __DIR__ . '/../database.sqlite';
+$dataDir = __DIR__ . '/../data';
+if (!file_exists($dataDir)) {
+    @mkdir($dataDir, 0777, true);
+}
+$dbPath = $dataDir . '/database.sqlite';
 
 try {
     $pdo = new PDO('sqlite:' . $dbPath);
