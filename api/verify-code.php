@@ -13,10 +13,6 @@ if (!isset($input['code'])) {
 }
 
 $code = strtoupper(trim($input['code']));
-$specialCodes = ['DGLC2026', 'BLUERANK_VIP', 'MASTERMIND'];
-
-// Sprawdź czy to jest specjalny kod (tzw. master key)
-$isSpecial = in_array($code, $specialCodes);
 
 try {
     // Sprawdź kod w bazie
@@ -24,15 +20,10 @@ try {
     $stmt->execute([':code' => $code]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if ($row || $isSpecial) {
-        $isUsed = $row ? (bool)$row['is_used'] : false;
+    if ($row) {
+        $isUsed = (bool)$row['is_used'];
         
-        // Zabezpieczenie: Jeśli kod specjalny, sprawdzamy po prostu czy go kiedyś użyto
-        // W tym przypadku dla kodów specjalnych nie chcemy ich blokować, bo są to master keys. 
-        // Jeśli jednak chcemy zablokować master keys po 1 użyciu, można odkomentować sprawdzanie w `registrations`.
-        // Załóżmy, że kody standardowe są 1-razowe, a master key działa zawsze, lub... użyjmy `isUsed`.
-
-        if (!$isSpecial && $isUsed) {
+        if ($isUsed) {
             http_response_code(400);
             echo json_encode(['success' => false, 'error' => 'used', 'message' => 'Niestety, ten kod został już wykorzystany.']);
         } else {

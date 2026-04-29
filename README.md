@@ -12,7 +12,7 @@ Aplikacja składa się z responsywnego, wizualnie dopracowanego frontendu (HTML/
 ## Jak działa system rejestracji?
 
 Rejestracja jest dwuetapowa:
-1. **Weryfikacja VIP:** Użytkownik musi podać specjalny jednorazowy kod z zaproszenia. Kody są bezpiecznie sprawdzane w bazie danych bez ich zdradzania we frontendzie. (Dostępne są też specjalne "Master Keys", np. `DGLC2026`).
+1. **Weryfikacja VIP:** Użytkownik musi podać specjalny jednorazowy kod z zaproszenia. Kody są bezpiecznie sprawdzane w bazie danych bez ich zdradzania we frontendzie.
 2. **Formularz zgłoszeniowy:** Po poprawnej weryfikacji użytkownik uzupełnia dane osobowe, a wykorzystany kod zostaje oznaczony jako "zużyty" w bazie, blokując go przed ponownym użyciem przez inne osoby.
 
 ## Struktura Plików

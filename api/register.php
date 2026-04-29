@@ -14,8 +14,6 @@ if (!isset($input['codeUsed']) || !isset($input['firstName']) || !isset($input['
 }
 
 $code = strtoupper(trim($input['codeUsed']));
-$specialCodes = ['DGLC2026', 'BLUERANK_VIP', 'MASTERMIND'];
-$isSpecial = in_array($code, $specialCodes);
 
 try {
     // Sprawdź kod
@@ -23,23 +21,21 @@ try {
     $stmt->execute([':code' => $code]);
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
-    if (!$row && !$isSpecial) {
+    if (!$row) {
         http_response_code(400);
         echo json_encode(['success' => false, 'error' => 'invalid_code', 'message' => 'Nieprawidłowy kod rejestracyjny.']);
         exit;
     }
 
-    if (!$isSpecial && $row && $row['is_used']) {
+    if ($row['is_used']) {
         http_response_code(400);
         echo json_encode(['success' => false, 'error' => 'code_used', 'message' => 'Ten kod został już wykorzystany w międzyczasie.']);
         exit;
     }
 
     // Oznacz jako zużyty
-    if (!$isSpecial) {
-        $update = $pdo->prepare("UPDATE vip_codes SET is_used = 1 WHERE code = :code");
-        $update->execute([':code' => $code]);
-    }
+    $update = $pdo->prepare("UPDATE vip_codes SET is_used = 1 WHERE code = :code");
+    $update->execute([':code' => $code]);
 
     // Dodaj rejestrację
     $insert = $pdo->prepare("
