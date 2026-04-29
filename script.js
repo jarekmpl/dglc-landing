@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!enteredCode) return;
 
         try {
-            const response = await fetch('/api/verify-code', {
+            const response = await fetch('api/verify-code.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ code: enteredCode })
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         submitBtn.disabled = true;
 
         try {
-            const response = await fetch('/api/register', {
+            const response = await fetch('api/register.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(payload)
