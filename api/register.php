@@ -1,6 +1,8 @@
 <?php
 header('Content-Type: application/json');
 
+require_once 'db.php';
+
 // Get POST data
 $inputJSON = file_get_contents('php://input');
 $input = json_decode($inputJSON, true);
@@ -13,62 +15,56 @@ if (!isset($input['codeUsed']) || !isset($input['firstName']) || !isset($input['
 
 $code = strtoupper(trim($input['codeUsed']));
 $specialCodes = ['DGLC2026', 'BLUERANK_VIP', 'MASTERMIND'];
+$isSpecial = in_array($code, $specialCodes);
 
-// Helper to read JSON
-function readJson($file, $default = []) {
-    if (!file_exists($file)) {
-        return $default;
+try {
+    // Sprawdź kod
+    $stmt = $pdo->prepare("SELECT is_used FROM vip_codes WHERE code = :code");
+    $stmt->execute([':code' => $code]);
+    $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$row && !$isSpecial) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'error' => 'invalid_code', 'message' => 'Nieprawidłowy kod rejestracyjny.']);
+        exit;
     }
-    $content = file_get_contents($file);
-    return json_decode($content, true) ?: $default;
+
+    if (!$isSpecial && $row && $row['is_used']) {
+        http_response_code(400);
+        echo json_encode(['success' => false, 'error' => 'code_used', 'message' => 'Ten kod został już wykorzystany w międzyczasie.']);
+        exit;
+    }
+
+    // Oznacz jako zużyty
+    if (!$isSpecial) {
+        $update = $pdo->prepare("UPDATE vip_codes SET is_used = 1 WHERE code = :code");
+        $update->execute([':code' => $code]);
+    }
+
+    // Dodaj rejestrację
+    $insert = $pdo->prepare("
+        INSERT INTO registrations 
+        (code_used, first_name, last_name, email, phone, company, job_title, linkedin, diet) 
+        VALUES 
+        (:code, :fn, :ln, :email, :phone, :company, :job, :linkedin, :diet)
+    ");
+    
+    $insert->execute([
+        ':code' => $code,
+        ':fn' => $input['firstName'],
+        ':ln' => $input['lastName'],
+        ':email' => $input['email'],
+        ':phone' => isset($input['phone']) ? $input['phone'] : '',
+        ':company' => isset($input['company']) ? $input['company'] : '',
+        ':job' => isset($input['jobTitle']) ? $input['jobTitle'] : '',
+        ':linkedin' => isset($input['linkedin']) ? $input['linkedin'] : '',
+        ':diet' => isset($input['diet']) ? $input['diet'] : ''
+    ]);
+
+    echo json_encode(['success' => true, 'message' => 'Rejestracja zakończona sukcesem!']);
+
+} catch (PDOException $e) {
+    http_response_code(500);
+    echo json_encode(['success' => false, 'error' => 'db_error', 'message' => 'Błąd zapisu do bazy danych. Sprawdź CHMOD 666 na pliku bazy i folderze.']);
 }
-
-// Helper to write JSON
-function writeJson($file, $data) {
-    file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT));
-}
-
-$vipCodesPath = '../vip_codes.json';
-$usedCodesPath = '../used_codes.json';
-$registrationsPath = '../registrations.json';
-
-$vipCodes = readJson($vipCodesPath, []);
-$usedCodes = readJson($usedCodesPath, []);
-$registrations = readJson($registrationsPath, []);
-
-if (!(in_array($code, $vipCodes) || in_array($code, $specialCodes))) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'invalid_code', 'message' => 'Nieprawidłowy kod rejestracyjny.']);
-    exit;
-}
-
-if (in_array($code, $usedCodes)) {
-    http_response_code(400);
-    echo json_encode(['success' => false, 'error' => 'code_used', 'message' => 'Ten kod został już wykorzystany w międzyczasie.']);
-    exit;
-}
-
-// Oznacz jako zużyty
-$usedCodes[] = $code;
-writeJson($usedCodesPath, $usedCodes);
-
-// Dodaj rejestrację
-$newRegistration = [
-    'id' => uniqid(),
-    'timestamp' => date('c'),
-    'codeUsed' => $code,
-    'firstName' => $input['firstName'],
-    'lastName' => $input['lastName'],
-    'email' => $input['email'],
-    'phone' => isset($input['phone']) ? $input['phone'] : '',
-    'company' => isset($input['company']) ? $input['company'] : '',
-    'jobTitle' => isset($input['jobTitle']) ? $input['jobTitle'] : '',
-    'linkedin' => isset($input['linkedin']) ? $input['linkedin'] : '',
-    'diet' => isset($input['diet']) ? $input['diet'] : ''
-];
-
-$registrations[] = $newRegistration;
-writeJson($registrationsPath, $registrations);
-
-echo json_encode(['success' => true, 'message' => 'Rejestracja zakończona sukcesem!']);
 ?>
