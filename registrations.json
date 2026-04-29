@@ -1,0 +1,25 @@
+[
+  {
+    "id": "1777457992131",
+    "timestamp": "2026-04-29T10:19:52.131Z",
+    "codeUsed": "DGLC2026",
+    "firstName": "Test",
+    "lastName": "User",
+    "email": "test@example.com",
+    "linkedin": "",
+    "diet": ""
+  },
+  {
+    "id": "1777458093422",
+    "timestamp": "2026-04-29T10:21:33.422Z",
+    "codeUsed": "DGLC-GABTXN",
+    "firstName": "Jarosław",
+    "lastName": "Miszczak",
+    "email": "j.miszczak@bluerank.com",
+    "phone": "600873288",
+    "company": "Bluerank",
+    "jobTitle": "CEO",
+    "linkedin": "",
+    "diet": ""
+  }
+]
