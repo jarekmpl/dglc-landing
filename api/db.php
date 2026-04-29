@@ -53,7 +53,7 @@ try {
 
 } catch (PDOException $e) {
     http_response_code(500);
-    echo json_encode(['success' => false, 'error' => 'db_error', 'message' => 'Błąd bazy danych: Sprawdź uprawnienia CHMOD (666) do pliku database.sqlite oraz folderu.']);
+    echo json_encode(['success' => false, 'error' => 'db_error', 'message' => 'Błąd bazy danych: ' . $e->getMessage()]);
     exit;
 }
 ?>
