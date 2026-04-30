@@ -1,4 +1,4 @@
-# Digital Growth Leaders Council - Landing Page
+# Growth Collective - Landing Page
 
 Ekskluzywny, zamknięty landing page na prywatne wydarzenie dla liderów marketingu i digitalu (organizowane przez Bluerank). 
 Aplikacja składa się z responsywnego, wizualnie dopracowanego frontendu (HTML/CSS/JS) oraz lekkiego i bezpiecznego backendu opisanego w czystym PHP i SQLite.
