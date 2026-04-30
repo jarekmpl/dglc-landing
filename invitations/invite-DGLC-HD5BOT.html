@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaproszenie | Digital Growth Collective</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #020710;
+            --text-color: #f1f5f9;
+            --text-muted: #94a3b8;
+            --primary-color: #00bfff;
+            --secondary-color: #005bb5;
+            --border-color: rgba(255, 255, 255, 0.12);
+            --card-bg: rgba(10, 18, 30, 0.82);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            font-family: 'Inter', sans-serif;
+            color: var(--text-color);
+            background:
+                radial-gradient(circle at 10% 10%, rgba(0, 191, 255, 0.22), transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(0, 91, 181, 0.25), transparent 45%),
+                var(--bg-color);
+            padding: 24px;
+        }
+
+        .invite-card {
+            width: 100%;
+            max-width: 820px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.45);
+        }
+
+        .eyebrow {
+            color: var(--primary-color);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+        }
+
+        h1 {
+            margin: 0 0 10px;
+            font-size: clamp(34px, 5vw, 58px);
+            line-height: 1.05;
+            letter-spacing: -1px;
+        }
+
+        h1 span {
+            background: linear-gradient(90deg, #ffffff, #7ed8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .lead {
+            margin: 0 0 24px;
+            color: #cbd5e1;
+            font-size: 18px;
+            line-height: 1.65;
+            max-width: 680px;
+        }
+
+        .meta {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 12px;
+            margin-bottom: 26px;
+        }
+
+        .meta-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 12px 14px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .meta-item strong {
+            display: block;
+            margin-top: 4px;
+            color: var(--text-color);
+            font-size: 15px;
+        }
+
+        .code-box {
+            border: 1px solid rgba(0, 191, 255, 0.45);
+            border-radius: 14px;
+            background: rgba(0, 191, 255, 0.08);
+            padding: 20px;
+            margin: 10px 0 20px;
+        }
+
+        .code-label {
+            margin: 0 0 8px;
+            color: var(--text-muted);
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .code-value {
+            margin: 0;
+            font-size: clamp(24px, 4vw, 36px);
+            font-weight: 800;
+            letter-spacing: 2px;
+            color: #ffffff;
+            word-break: break-word;
+        }
+
+        .note {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <article class="invite-card">
+        <p class="eyebrow">Zaproszenie indywidualne</p>
+        <h1>Digital Growth<br><span>Collective</span></h1>
+        <p class="lead">
+            Zapraszamy do udziału w kameralnym spotkaniu liderów marketingu i digitalu.
+            Twoje zaproszenie zostało oznaczone unikalnym kodem, który uprawnia do rejestracji.
+        </p>
+
+        <div class="meta">
+            <div class="meta-item">Data<strong>11-12 czerwca 2026</strong></div>
+            <div class="meta-item">Miejsce<strong>Pałac Żelechów SPA &amp; Wellness</strong></div>
+            <div class="meta-item">Format<strong>Closed-door / Invite-only</strong></div>
+        </div>
+
+        <div class="code-box">
+            <p class="code-label">Twój indywidualny kod zaproszenia</p>
+            <p class="code-value">DGLC-HD5BOT</p>
+        </div>
+
+        <p class="note">
+            Kod jest jednorazowy i przypisany do tego zaproszenia. Podaj go w formularzu rejestracyjnym na landing page.
+        </p>
+    </article>
+</body>
+
+</html>

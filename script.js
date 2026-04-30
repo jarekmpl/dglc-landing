@@ -81,6 +81,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Krok 2: Wysłanie formularza
     registrationForm.addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const termsConsent = document.getElementById('terms-consent');
+        if (termsConsent && !termsConsent.checked) {
+            alert('Aby kontynuować, zaakceptuj regulamin wydarzenia.');
+            return;
+        }
         
         const payload = {
             codeUsed: currentValidCode,
