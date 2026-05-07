@@ -16,7 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     verifyBtn.addEventListener('click', async () => {
         const enteredCode = inviteCodeInput.value.trim().toUpperCase();
         
-        if (!enteredCode) return;
+        if (!enteredCode) {
+            codeErrorMsg.textContent = 'Proszę wpisać kod z zaproszenia.';
+            showCodeError();
+            return;
+        }
 
         try {
             const response = await fetch('api/verify-code.php', {
