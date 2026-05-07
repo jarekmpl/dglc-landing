@@ -56,4 +56,3 @@ try {
     echo json_encode(['success' => false, 'error' => 'db_error', 'message' => 'Błąd bazy danych: ' . $e->getMessage()]);
     exit;
 }
-?>

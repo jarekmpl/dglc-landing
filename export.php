@@ -46,4 +46,3 @@ try {
 
 fclose($output);
 exit;
-?>

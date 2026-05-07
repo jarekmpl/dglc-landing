@@ -63,4 +63,3 @@ try {
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => 'db_error', 'message' => 'Błąd zapisu do bazy danych. Sprawdź CHMOD 666 na pliku bazy i folderze.']);
 }
-?>
