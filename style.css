@@ -410,11 +410,7 @@ section {
 .timeline-day h3 {
     font-size: 1.3rem;
     color: #fff;
-    margin-bottom: 1.5rem;
-    margin-left: -20px;
-    background: var(--bg-color);
-    display: inline-block;
-    padding-right: 15px;
+    margin-bottom: 0.2rem;
 }
 
 .timeline-day h3 span {
