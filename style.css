@@ -79,7 +79,7 @@ body {
 }
 
 .nav-container {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
     display: flex;
@@ -89,9 +89,12 @@ body {
 
 /* Rozwiazanie ciemnego Logo: Bialy "Pill" chroniący widoczność PNG */
 .logo-wrapper {
-    padding: 0;
+    background: #ffffff;
+    padding: 8px 16px;
+    border-radius: 60px; /* lekka pigułka */
     display: flex;
     align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     text-decoration: none;
     transition: transform 0.2s ease;
 }
@@ -102,9 +105,9 @@ body {
 
 .logo {
     height: auto;
-    max-height: 65px;
+    max-height: 48px;
     width: auto;
-    max-width: 250px;
+    max-width: 200px;
     object-fit: contain;
     display: block;
 }
